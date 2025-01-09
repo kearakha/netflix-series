@@ -37,7 +37,7 @@ include "koneksi.php";
                 <a class="nav-link" href="#gallery">Gallery</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#release">Date</a>
+                <a class="nav-link" href="#schedule">Schedule</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#about">About</a>
@@ -94,7 +94,7 @@ include "koneksi.php";
           ?>
             <div class="col">
               <div class="card h-100">
-                <img src="img/<?= $row["gambar"]?>" class="card-img-top" alt="..." />
+                <img src="img/<?=$row["gambar"]?>" class="card-img-top" alt="..." />
                 <div class="card-body">
                   <h5 class="card-title"><?= $row["judul"]?></h5>
                   <p class="card-text">
@@ -122,32 +122,43 @@ include "koneksi.php";
           <h1 class="fw-bold display-4 pb-3">Gallery</h1>
           <div id="carouselExampleIndicators" class="carousel slide">
               <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
+              <?php
+                $sql = "SELECT * FROM gallery";
+                $hasil = $conn->query($sql);
+
+                // Counter untuk slide index
+                $slideIndex = 0;
+                while ($row = $hasil->fetch_assoc()) {
+                    // Set button pertama sebagai active
+                    $active = ($slideIndex === 0) ? 'active' : '';
+                    echo "<button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='$slideIndex' class='$active' aria-label='Slide " . ($slideIndex + 1) . "'></button>";
+                    $slideIndex++;
+                }
+                ?>
               </div>
+
+              <?php
+                $sql = "SELECT * FROM gallery";
+                $hasil = $conn->query($sql);
+
+                $active = true; // Flag to set the first item as active
+                ?>
+
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="https://static.promediateknologi.id/crop/4x263:731x841/0x0/webp/photo/p2/01/2024/01/11/c38827f29cc34150b1d51f3d40902af0-2551137924.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBiqQ_4e8HRVAFQtwJ9576rtPrVgTjjxNJHBgIx81Fjb4_ZGG5" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/214/2023/12/06/3-3339679421.png" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://akcdn.detik.net.id/community/media/visual/2021/03/31/pemain-money-heist-versi-korea-4_43.jpeg?w=700&q=90" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQk8sIU3igBBYntWAzbYpLQDpimuix5j7rINjwsqZ2OdNkNd6j-" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://assets.ggwp.id/2021/07/Lupin-640x360.jpeg" class="d-block w-100" alt="...">
-                </div>
+
+              <?php
+                    while ($row = $hasil->fetch_assoc()) {
+                    ?>
+                        <div class="carousel-item <?= $active ? 'active' : '' ?>">
+                            <img
+                                src="img/<?= $row["gambar"] ?>"
+                                class="d-block w-100"
+                                alt="..." />
+                        </div>
+                    <?php
+                        $active = false; // Set the flag to false after the first item
+                    }
+                    ?>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -162,10 +173,10 @@ include "koneksi.php";
   </section>
     <!-- gallery end -->
 
-    <!-- release start -->
-    <section id="release" class="text-center p-5">
+    <!-- schedule start -->
+    <section id="schedule" class="text-center p-5">
     <div class="container">
-      <h1 class="fw-bold display-4 pb-3">Release Date</h1>
+      <h1 class="fw-bold display-4 pb-3">Schedule</h1>
       <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
         <div class="col">
           <div class="card h-100">
@@ -231,11 +242,12 @@ include "koneksi.php";
       </div>
     </div>
     </section>
-    <!-- release end -->
+    <!-- schedule end -->
     
-    <!-- about me star -->
+    <!-- about me start -->
     <section id="about" class="text-center p-5 bg-danger-subtle">
         <div class="container">
+        <h1 class="fw-bold display-4 pb-3">About Me</h1>
           <div class="d-sm-flex align-items-center justify-content-center">
             <div class="p-3">
               <img
@@ -244,6 +256,7 @@ include "koneksi.php";
                 width="300"
               />
             </div>
+            <div class="isiabout">
             <div class="p-md-5 text-sm-start">
               <h3 class="lead">A11.2023.15165</h3>
               <h1 class="fw-bold">Muhammad Rakha Keanura</h1>
@@ -253,6 +266,7 @@ include "koneksi.php";
               >
             </div>
           </div>
+        </div>
         </div>
     </section>
     <!-- about me end -->
@@ -316,8 +330,8 @@ include "koneksi.php";
             document.getElementById("article").classList.remove("text-black");
             document.getElementById("article").classList.add("text-white");
 
-            document.getElementById("release").classList.remove("text-black");
-            document.getElementById("release").classList.add("text-white");
+            document.getElementById("schedule").classList.remove("text-black");
+            document.getElementById("schedule").classList.add("text-white");
 
             const collection = document.getElementsByClassName("card");
             for (let i = 0; i < collection.length; i++) {
@@ -362,8 +376,8 @@ include "koneksi.php";
         document.getElementById("article").classList.remove("text-white");
         document.getElementById("article").classList.add("text-black");
 
-        document.getElementById("release").classList.remove("text-white");
-        document.getElementById("release").classList.add("text-black");
+        document.getElementById("schedule").classList.remove("text-white");
+        document.getElementById("schedule").classList.add("text-black");
 
         const collection = document.getElementsByClassName("card");
         for (let i = 0; i < collection.length; i++) {
@@ -379,6 +393,11 @@ include "koneksi.php";
             for (let i = 0; i < collection3.length; i++) {
               collection3[i].classList.remove("text-white");
             }
+      };
+
+      document.querySelector("#about").onclick = function() {
+        const isiAboutText = document.querySelector(".isiabout");
+        isiAboutText.style.display = isiAboutText.style.display === "none" ? "block" : "none";
       };
     </script>
 </body>

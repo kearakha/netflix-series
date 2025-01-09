@@ -1,4 +1,5 @@
 <?php
+
 //query untuk mengambil data article
 $sql1 = "SELECT * FROM article ORDER BY tanggal DESC";
 $hasil1 = $conn->query($sql1);
@@ -7,11 +8,12 @@ $hasil1 = $conn->query($sql1);
 $jumlah_article = $hasil1->num_rows;
 
 //query untuk mengambil data gallery
-//$sql2 = "SELECT * FROM gallery ORDER BY tanggal DESC";
-//$hasil2 = $conn->query($sql2);
+$sql2 = "SELECT * FROM gallery ORDER BY tanggal DESC";
+$hasil2 = $conn->query($sql2);
 
 //menghitung jumlah baris data gallery
-//$jumlah_gallery = $hasil2->num_rows;
+$jumlah_gallery = $hasil2->num_rows;
+
 ?>
 <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center pt-4">
     <div class="col">
