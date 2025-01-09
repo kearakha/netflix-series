@@ -2,17 +2,14 @@
 session_start(); // Memulai session
 include "koneksi.php";
 
-// Ambil username dari session
 $username = $_SESSION['username'];
 
-// Ambil data pengguna dari database berdasarkan username
 $sql = "SELECT * FROM user WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Jika data ditemukan
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 ?>
@@ -50,8 +47,6 @@ if ($result->num_rows > 0) {
     </div>
 </div>
 <?php 
-} else {
-    echo "<p>Tidak ada data.</p>";
 }
 ?>
 
@@ -59,7 +54,6 @@ if ($result->num_rows > 0) {
 
 include "upload_foto.php";
 
-// Jika tombol simpan diklik
 if (isset($_POST['simpan'])) {
     $id = $_POST['id'];
     $password = !empty($_POST['password']) ? md5($_POST['password']) : null;

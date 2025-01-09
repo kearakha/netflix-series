@@ -14,8 +14,8 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Top Netflix Series | Admin</title>
-    <link rel="icon" href="img/logo_netflix-removebg-preview.jpeg" />
+    <title>Top Netflix Series | <?= $_SESSION['username']?></title>
+    <link rel="icon" href="img/logo_netflix-removebg-preview.jpeg"/>
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"

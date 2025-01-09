@@ -45,9 +45,6 @@ include "koneksi.php";
               <li class="nav-item">
                 <a class="nav-link" href="login.php" target="_blank">Login</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="logout.php">Logout</a>
-              </li>
               <button type="button" id="darkButton" class="btn btn-dark theme" title="dark">
                 <i class="bi bi-moon-fill"></i>
               </button>
